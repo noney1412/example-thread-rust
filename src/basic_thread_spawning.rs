@@ -20,7 +20,7 @@ fn nex_thread() {
     println!("spawn a thread {:?}", thread_id);
 }
 
-pub fn basic_thread_spawning2() {
+pub fn basic_thread_spawning_2() {
     let mut handlers = vec![];
 
     for i in 0..10 {
@@ -49,6 +49,6 @@ mod tests {
 
 		#[test]
     fn test_basic_thread_spawning2() {
-      basic_thread_spawning2();
+      basic_thread_spawning_2();
     }
 }
