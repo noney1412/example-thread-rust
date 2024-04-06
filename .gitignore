@@ -1,0 +1,15 @@
+# Ignore compiled files and directories
+/target/
+
+# Ignore Cargo.lock file
+Cargo.lock
+
+# Ignore .env files (if used for environment variables)
+.env
+
+# Exclude editor-specific files (e.g., Visual Studio Code, IntelliJ, etc.)
+.vscode/
+.idea/
+
+# Exclude OS-specific files
+.DS_Store
