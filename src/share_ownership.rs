@@ -1,3 +1,4 @@
+use std::cell::RefCell;
 use std::rc::Rc;
 use std::thread;
 
@@ -14,18 +15,37 @@ pub fn static_share() {
         .unwrap();
 }
 
+#[derive(Debug)]
+struct MyData {
+    value: String,
+}
+
 pub fn shared_with_rc() {
-    let a = Rc::new("my value".to_string());
+    let a = Rc::new(RefCell::new(MyData {
+        value: "hello".to_string(),
+    }));
 
     let b = a.clone();
 
     {
         let c = a.clone();
-        println!("a : {:?}, b: {:?}, c: {:?}", a.as_ptr(), b.as_ptr(), c.as_ptr());
+
+        println!(
+            "a : {:?}, b: {:?}, c: {:?}",
+            a.as_ptr(),
+            b.as_ptr(),
+            c.as_ptr()
+        );
+
+        let mut brm = c.borrow_mut();
+
+        brm.value = "world".to_string();
+
         println!("ref count in scope: {:?}", Rc::strong_count(&a));
     }
 
     println!("ref count out scope: {:?}", Rc::strong_count(&a));
+    println!("the latest value: {:?}", a);
 }
 
 #[cfg(test)]
